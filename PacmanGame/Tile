@@ -1,0 +1,46 @@
+class Tile {
+  boolean wall = false;
+  boolean dot = false;
+  boolean bigDot = false;
+  boolean eaten = false;
+  PVector pos;
+  int flashCount = 0;
+  //PImage imgP;
+//-------------------------------------------------------------------------------------------------------------------------------------------
+  //constructor
+  Tile(float x, float y) {
+    pos = new PVector(x, y);
+    //imgP = loadImage("present.png");
+  }
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+//draw a dot if there is one in this tile
+  void show() {
+    if (dot) {
+      if (!eaten) {//draw dot
+        if((flashCount/30)%2 == 1){
+          fill(0, 255, 0); //green
+        }
+        else{
+          fill(255, 0, 0); //red
+        }
+        noStroke();
+        ellipse(pos.x, pos.y, 3, 3);
+      }
+    } else if (bigDot) {
+      if (!eaten) {//draw big dot
+        //image(imgP, pos.x, pos.y, 7, 15);
+        
+        if((flashCount/30)%2 == 1){
+          fill(0, 255, 0); //green
+        }
+        else{
+          fill(255, 0, 0); //red
+        }
+        noStroke();
+        //image(imgP, pos.x, pos.y, 7, 15);
+        ellipse(pos.x, pos.y, 15, 15);
+      }
+    }
+    flashCount++;
+  }
+}
