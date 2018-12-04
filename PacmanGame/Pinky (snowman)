@@ -18,11 +18,13 @@ class Pinky {
   int deadCount = 0;
   
   PImage imgSnow;
+  PImage imgSnowInvert;
   //--------------------------------------------------------------------------------------------------------------------------------------------------
   //constructor
   Pinky() {
     setPath();
     imgSnow = loadImage("snowman.png");
+    imgSnowInvert = loadImage("snowmanI.png");
   }
   //--------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -48,31 +50,16 @@ class Pinky {
       }
     } else {//if not deadforabit then show the ghost
       if (!frightened) {
-        if (returnHome) {//have the ghost be transparent if on its way home
-          stroke(colour, 100); 
-          fill(colour, 100);
-        } else {// colour the ghost
-          stroke(colour);
-          fill(colour);
-        }
+        image(imgSnow, pos.x -10 /*move left*/, pos.y -20/*move up*/, 35, 40);
         bestPath.show();//show the path the ghost is following
       } else {//if frightened
-        flashCount ++;
+      flashCount ++;
         if (flashCount > 800) {//after 8 seconds the ghosts are no longer frightened
           frightened = false;
           flashCount = 0;
         }
-
-        if (floor(flashCount / 30) %2 ==0) {//make it flash white and blue every 30 frames
-          stroke(255);
-          fill(255);
-        } else {//flash blue
-          stroke(0, 0, 200);
-          fill(0, 0, 200);
-        }
+          image(imgSnowInvert, pos.x -10 /*move left*/, pos.y -20/*move up*/, 35, 40);
       }
-      image(imgSnow, pos.x -10 /*move left*/, pos.y -20/*move up*/, 35, 40);
-      //ellipse(pos.x, pos.y, 20, 20);//draw the ghost as a circle
     }
   }
 
